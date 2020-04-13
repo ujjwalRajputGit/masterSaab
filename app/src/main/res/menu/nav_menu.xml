@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home"/>
+
+        <item
+            android:id="@+id/nav_category"
+            android:title="@string/category" />
+
+    </group>
+
+    <item android:title="@string/communicate">
+        <menu>
+            <group android:checkableBehavior="single">
+
+            <item
+                android:id="@+id/nav_contactUs"
+                android:title="@string/contact_us" />
+
+            <item
+                android:id="@+id/nav_about"
+                android:title="@string/about" />
+
+            <item
+                android:id="@+id/nav_Privacy"
+                android:title="@string/privacy_policy" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

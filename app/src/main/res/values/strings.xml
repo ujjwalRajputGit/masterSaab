@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">masterSaab</string>
+    <string name="openNavDrawer">Navigation Drawer Open</string>
+    <string name="closeNavDrawer">Navigation Drawer Close</string>
+    <string name="heading">Heading</string>
+    <string name="content">Content are the big field</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title">title</string>
+    <string name="image_related_to_content">image related to content</string>
+    <string name="user_image">user image</string>
+    <string name="username">username</string>
+    <string name="email">abc@xyz.com</string>
+    <string name="art_amp_culture"><![CDATA[Art & Culture]]></string>
+    <string name="defence_amp_security"><![CDATA[Defence & Security]]></string>
+    <string name="disaster_management">Disaster Management</string>
+    <string name="economics">Economics</string>
+    <string name="geography">Geography</string>
+    <string name="governance_amp_social_justice"><![CDATA[Governance & Social Justice]]></string>
+    <string name="history">History</string>
+    <string name="indian_society">Indian Society</string>
+    <string name="international_relations">International Relations</string>
+    <string name="polity">Polity</string>
+    <string name="science_amp_technology"><![CDATA[Science & Technology]]></string>
+    <string name="vividha">Vividha</string>
+    <string name="home">Home</string>
+    <string name="category">Category</string>
+    <string name="communicate">Communicate</string>
+    <string name="contact_us">Contact</string>
+    <string name="about">About us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="back">Back</string>
+    <string name="environment">Environment</string>
+
+</resources>

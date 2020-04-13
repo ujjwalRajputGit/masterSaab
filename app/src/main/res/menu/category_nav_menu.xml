@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_BackPress"
+        android:title="@string/back"
+        android:icon="@drawable/ic_arrow_back_black"/>
+
+    <item android:title="@string/category">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_artAndCulture"
+                    android:title="@string/art_amp_culture" />
+
+                <item
+                    android:id="@+id/nav_defenceAndSecurity"
+                    android:title="@string/defence_amp_security" />
+
+                <item
+                    android:id="@+id/nav_disasterManagement"
+                    android:title="@string/disaster_management" />
+
+                <item
+                    android:id="@+id/nav_economics"
+                    android:title="@string/economics" />
+
+                <item
+                    android:id="@+id/nav_environment"
+                    android:title="@string/environment" />
+
+                <item
+                    android:id="@+id/nav_geography"
+                    android:title="@string/geography" />
+
+                <item
+                    android:id="@+id/nav_governanceAndSocialJustice"
+                    android:title="@string/governance_amp_social_justice" />
+
+                <item
+                    android:id="@+id/nav_history"
+                    android:title="@string/history" />
+
+                <item
+                    android:id="@+id/nav_indianSociety"
+                    android:title="@string/indian_society" />
+
+                <item
+                    android:id="@+id/nav_internationalRelations"
+                    android:title="@string/international_relations" />
+
+                <item
+                    android:id="@+id/nav_polity"
+                    android:title="@string/polity" />
+
+                <item
+                    android:id="@+id/nav_scienceAndTechnology"
+                    android:title="@string/science_amp_technology" />
+
+                <item
+                    android:id="@+id/nav_vividha"
+                    android:title="@string/vividha" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>
+
