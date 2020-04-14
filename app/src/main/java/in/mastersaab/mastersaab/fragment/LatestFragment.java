@@ -14,8 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import in.mastersaab.mastersaab.R;
 import in.mastersaab.mastersaab.adapter.FirestoreAdapter;
@@ -53,7 +57,7 @@ public class LatestFragment extends Fragment {
 
         //Pagination
         PagedList.Config config = new PagedList.Config.Builder()
-                .setInitialLoadSizeHint(10)
+                .setInitialLoadSizeHint(5)
                 .setPageSize(3)
                 .build();
 
@@ -62,7 +66,7 @@ public class LatestFragment extends Fragment {
                 .setLifecycleOwner(this)
                 .setQuery(query, config, ContentData.class)
                 .build();
-
+        
         FirestoreAdapter firestorePagingAdapter = new FirestoreAdapter(options);
         recyclerView.setAdapter(firestorePagingAdapter);
     }

@@ -25,7 +25,6 @@ import in.mastersaab.mastersaab.dataModel.ContentData;
 public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, FirestoreAdapter.ProductsViewHolder> {
 
 
-
     public FirestoreAdapter(@NonNull FirestorePagingOptions<ContentData> options) {
         super(options);
     }

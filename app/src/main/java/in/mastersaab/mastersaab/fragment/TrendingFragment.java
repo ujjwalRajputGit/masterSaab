@@ -52,7 +52,7 @@ public class TrendingFragment extends Fragment {
 
         //Pagination
         PagedList.Config config = new PagedList.Config.Builder()
-                .setInitialLoadSizeHint(10)
+                .setInitialLoadSizeHint(5)
                 .setPageSize(3)
                 .build();
 
