@@ -18,8 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import in.mastersaab.mastersaab.R;
-import in.mastersaab.mastersaab.dataModel.ContentData;
 import in.mastersaab.mastersaab.adapter.FirestoreAdapter;
+import in.mastersaab.mastersaab.dataModel.ContentData;
 
 public class TrendingFragment extends Fragment {
 
@@ -44,27 +44,10 @@ public class TrendingFragment extends Fragment {
         recyclerView = view.findViewById(R.id.latest_recView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Bundle bundle = getArguments();
-        if (getArguments() != null) {
-            collection = bundle.getString("collection");
-            Log.d("collection",collection);
-        }
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        Query query;
-
-        switch (collection){
-            case "environment":
-                query = firebaseFirestore.collection("Enviorment");
-                break;
-            default:
-                query = firebaseFirestore.collection("Content");
-
-        }
-
-        fetchData(query);
+        setQuery();
     }
 
-    public void fetchData(Query query) {
+    private void fetchData(Query query) {
         Log.d("firebaseInstance", firebaseFirestore + " F1");
 
         //Pagination
@@ -95,4 +78,105 @@ public class TrendingFragment extends Fragment {
         super.onStop();
         Log.d("state","activity stop1");
     }
+
+    private void setQuery() {
+
+        Bundle bundle = getArguments();
+        if (getArguments() != null) {
+            collection = bundle.getString("collection");
+            Log.d("collection",collection);
+        }
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        Query query;
+        switch (collection) {
+            case "artAndCulture":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Art And Culture")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "defenceAndSecurity":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Defence And Security")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "disasterManagement":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Disaster Management")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "economics":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Economics")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "environment":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Environment")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "geography":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Geography")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "governanceAndSocialJustice":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Governance And Social Justice")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "history":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","History")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+
+                break;
+            case "indianSociety":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","IndianSociety")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "internationalRelations":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","International Relations")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "polity":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Polity")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "scienceAndTechnology":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Science And Technology")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "vividha":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Vividha")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            default:
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("trending",true)
+                        .orderBy("date", Query.Direction.ASCENDING);
+
+        }
+
+        fetchData(query);
+    }
+
 }

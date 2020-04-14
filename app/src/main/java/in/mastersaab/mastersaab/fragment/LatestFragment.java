@@ -18,8 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import in.mastersaab.mastersaab.R;
-import in.mastersaab.mastersaab.dataModel.ContentData;
 import in.mastersaab.mastersaab.adapter.FirestoreAdapter;
+import in.mastersaab.mastersaab.dataModel.ContentData;
 
 public class LatestFragment extends Fragment {
 
@@ -34,7 +34,7 @@ public class LatestFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-              return inflater.inflate(R.layout.fragment_latest, container, false);
+        return inflater.inflate(R.layout.fragment_latest, container, false);
     }
 
     @Override
@@ -44,27 +44,11 @@ public class LatestFragment extends Fragment {
         recyclerView = view.findViewById(R.id.latest_recView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Bundle bundle = getArguments();
-        if (getArguments() != null) {
-            collection = bundle.getString("collection");
-            Log.d("collection",collection);
-        }
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        Query query;
+        setQuery();
 
-        switch (collection){
-            case "environment":
-                query = firebaseFirestore.collection("Enviorment");
-                break;
-            default:
-                query = firebaseFirestore.collection("Content");
-
-        }
-
-        fetchData(query);
     }
 
-    public void fetchData(Query query) {
+    private void fetchData(Query query) {
         Log.d("firebaseInstance", firebaseFirestore + " F1");
 
         //Pagination
@@ -86,13 +70,98 @@ public class LatestFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("state","activity start1");
+        Log.d("state", "activity start1");
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d("state","activity stop1");
+        Log.d("state", "activity stop1");
     }
+
+    private void setQuery() {
+
+        Bundle bundle = getArguments();
+        if (getArguments() != null) {
+            collection = bundle.getString("collection");
+            Log.d("collection", collection);
+        }
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        Query query;
+        switch (collection) {
+            case "artAndCulture":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Art And Culture")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "defenceAndSecurity":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Defence And Security")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "disasterManagement":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Disaster Management")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "economics":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Economics")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "environment":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Environment")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "geography":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Geography")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "governanceAndSocialJustice":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Governance And Social Justice")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "history":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","History")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "indianSociety":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","IndianSociety")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "internationalRelations":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","International Relations")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "polity":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Polity")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "scienceAndTechnology":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Science And Technology")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            case "vividha":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Vividha")
+                        .orderBy("date", Query.Direction.ASCENDING);
+                break;
+            default:
+                query = firebaseFirestore.collection("Content")
+                        .orderBy("date", Query.Direction.DESCENDING);
+        }
+
+        fetchData(query);
+    }
+
 }

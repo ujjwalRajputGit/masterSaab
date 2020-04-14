@@ -75,14 +75,18 @@ public class FullScreenActivity extends AppCompatActivity {
             case R.id.zoomIn:
                 float titleTextSize = pixelsToSp(this,title.getTextSize());
                 float contentTextSize = pixelsToSp(this,content.getTextSize());
-                title.setTextSize(titleTextSize + 2f);
-                content.setTextSize(contentTextSize + 2f);
+                if(titleTextSize < 30f) {
+                    title.setTextSize(titleTextSize + 2f);
+                    content.setTextSize(contentTextSize + 2f);
+                }
                 break;
             case R.id.zoomOut:
                 titleTextSize = pixelsToSp(this, title.getTextSize());
                 contentTextSize = pixelsToSp(this, content.getTextSize());
-                title.setTextSize(titleTextSize - 2f);
-                content.setTextSize(contentTextSize - 2f);
+                if(titleTextSize > 12f) {
+                    title.setTextSize(titleTextSize - 2f);
+                    content.setTextSize(contentTextSize - 2f);
+                }
                 break;
 
         }

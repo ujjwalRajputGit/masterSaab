@@ -27,12 +27,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private String previousData ="previousData";
+    private String previousData ="default";
 
     private TrendingFragment trendingFragment = new TrendingFragment();
     private LatestFragment latestFragment = new LatestFragment();
-
-
 
 
     @Override
@@ -70,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //navigation drawer start
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_home);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -194,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-      if(item.getItemId() != R.id.nav_category) {
+      if(item.getItemId() != R.id.nav_category && item.getItemId() != R.id.nav_BackPress) {
           drawerLayout.closeDrawer(GravityCompat.START);
       }
 
