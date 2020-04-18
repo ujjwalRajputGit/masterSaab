@@ -31,7 +31,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
 
     @Override
     protected void onBindViewHolder(@NonNull ProductsViewHolder holder, int position, @NonNull final ContentData model) {
-        Log.d("data",model.getTitle());
+        Log.d("position","positin" + position);
 
         holder.recView_title.setText(model.getTitle());
         holder.recView_content.setText(Html.fromHtml(model.getContent()));

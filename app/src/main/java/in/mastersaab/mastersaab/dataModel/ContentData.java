@@ -1,8 +1,6 @@
 package in.mastersaab.mastersaab.dataModel;
 
 
-import java.util.Date;
-
 public class ContentData {
 
     private String title;
@@ -11,14 +9,11 @@ public class ContentData {
 
     public ContentData() {}
 
-
-
     public ContentData(String title, String content, String imageUrl) {
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
     }
-
 
     public String getTitle() {
         return title;

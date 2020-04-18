@@ -1,8 +1,12 @@
 package in.mastersaab.mastersaab.activity;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -10,13 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 import in.mastersaab.mastersaab.R;
 import in.mastersaab.mastersaab.adapter.ViewPagerAdapter;
@@ -32,11 +41,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TrendingFragment trendingFragment = new TrendingFragment();
     private LatestFragment latestFragment = new LatestFragment();
 
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        //initialising Banner Ad
+        AdView adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         //adding the toolbar
@@ -46,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = findViewById(R.id.tab_layout);
 
 
-        //tablayout setup with viewPager
+        //tabLayout setup with viewPager
         tabLayout.setupWithViewPager(viewPager);
 
         //setting viewPager Adapter
@@ -55,15 +70,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //adding fragment to viewPager Adapter start
         viewPagerAdapter.addFragment(latestFragment, "नवीनतम");
         viewPagerAdapter.addFragment(trendingFragment, "ट्रेंडिंग");
-        //adding fragment to viewPager Adapter end
 
         //adding viewPager Adapter
         viewPager.setAdapter(viewPagerAdapter);
 
         //adding icon to tab layout start
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_new_icon_black);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_trending_icon_black);
-        //adding icon to tab layout start
+        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.ic_new_icon_black);
+        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.ic_trending_icon_black);
+
 
         //navigation drawer start
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -81,12 +95,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        //navigation drawer end
+
+        //loading Ad
+        adView.loadAd(adRequest);
 
     }
 
-
-    public void drawerItemClick(String drawer_item) {
+    public void drawerItemClick(String drawer_item,String title_name) {
         Bundle bundle = new Bundle();
         bundle.putString("collection", drawer_item);
 
@@ -100,9 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.attach(trendingFragment);
             ft.commit();
             previousData = drawer_item;
+            Objects.requireNonNull(getSupportActionBar()).setTitle(title_name);
         }
     }
-
 
     //navigation drawer item click method
     @Override
@@ -114,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
 
             case R.id.nav_home:
-                drawerItemClick("default");
+                drawerItemClick("default","masterSaab");
 
                 break;
             case R.id.nav_category:
@@ -139,55 +154,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setNavigationItemSelectedListener(this);
                 break;
             case R.id.nav_artAndCulture:
-                drawerItemClick("artAndCulture");
+                drawerItemClick("artAndCulture","Art & Culture");
 
                 break;
             case R.id.nav_defenceAndSecurity:
-                drawerItemClick("defenceAndSecurity");
+                drawerItemClick("defenceAndSecurity", "Defence & Security");
 
                 break;
             case R.id.nav_disasterManagement:
-                drawerItemClick("disasterManagement");
+                drawerItemClick("disasterManagement", "Disaster Management");
 
                 break;
             case R.id.nav_economics:
-                drawerItemClick("economics");
+                drawerItemClick("economics", "Economics");
 
                 break;
             case R.id.nav_environment:
-                drawerItemClick("environment");
+                drawerItemClick("environment", "Environment");
 
                 break;
             case R.id.nav_geography:
-                drawerItemClick("geography");
+                drawerItemClick("geography", "Geography");
 
                 break;
             case R.id.nav_governanceAndSocialJustice:
-                drawerItemClick("governanceAndSocialJustice");
-
-                break;
-            case R.id.nav_history:
-                drawerItemClick("history");
+                drawerItemClick("governanceAndSocialJustice", "Governance & SocialJustice");
 
                 break;
             case R.id.nav_indianSociety:
-                drawerItemClick("indianSociety");
+                drawerItemClick("indianSociety", "Indian Society");
 
                 break;
             case R.id.nav_internationalRelations:
-                drawerItemClick("internationalRelations");
+                drawerItemClick("internationalRelations", "International Relations");
 
                 break;
             case R.id.nav_polity:
-                drawerItemClick("polity");
+                drawerItemClick("polity", "polity");
 
                 break;
             case R.id.nav_scienceAndTechnology:
-                drawerItemClick("scienceAndTechnology");
+                drawerItemClick("scienceAndTechnology", "Science & Technology");
 
                 break;
-            case R.id.nav_vividha:
-                drawerItemClick("vividha");
+            case R.id.nav_miscellaneous:
+                drawerItemClick("miscellaneous", "Miscellaneous");
 
                 break;
 

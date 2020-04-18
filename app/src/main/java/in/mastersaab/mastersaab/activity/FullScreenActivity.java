@@ -4,21 +4,21 @@ package in.mastersaab.mastersaab.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.util.Objects;
 
@@ -26,13 +26,18 @@ import in.mastersaab.mastersaab.R;
 
 public class FullScreenActivity extends AppCompatActivity {
 
-    TextView title;
-    TextView content;
+    private TextView title;
+    private HtmlTextView htmlTextView;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_srcreen);
+
+        // Initialize the InterstitialAd
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
         Toolbar toolbar = findViewById(R.id.fullscreen_toolbar);
         setSupportActionBar(toolbar);
@@ -42,14 +47,12 @@ public class FullScreenActivity extends AppCompatActivity {
         Intent data = getIntent();
 
         title = findViewById(R.id.fullscreen_title);
-        content = findViewById(R.id.fullscreen_content);
+        htmlTextView = findViewById(R.id.fullscreen_htmlView);
         ImageView imageView = findViewById(R.id.fullscreen_imageView);
 
-        Spanned contentText = Html.fromHtml(data.getStringExtra("content"));
 
         title.setText(data.getStringExtra("title"));
-        content.setText(contentText);
-        content.setMovementMethod(LinkMovementMethod.getInstance());
+        htmlTextView.setHtml(data.getStringExtra("content"),new HtmlHttpImageGetter(htmlTextView));
         String imageUrl = data.getStringExtra("imageUrl");
 
         Glide.with(this)
@@ -57,6 +60,7 @@ public class FullScreenActivity extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder_image)
                 .into(imageView);
 
+        loadInterstitialAd();
     }
 
     @Override
@@ -68,24 +72,24 @@ public class FullScreenActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.zoomIn:
-                float titleTextSize = pixelsToSp(this,title.getTextSize());
-                float contentTextSize = pixelsToSp(this,content.getTextSize());
-                if(titleTextSize < 30f) {
+                float titleTextSize = pixelsToSp(this, title.getTextSize());
+                float contentTextSize = pixelsToSp(this, htmlTextView.getTextSize());
+                if (titleTextSize < 30f) {
                     title.setTextSize(titleTextSize + 2f);
-                    content.setTextSize(contentTextSize + 2f);
+                    htmlTextView.setTextSize(contentTextSize + 2f);
                 }
                 break;
             case R.id.zoomOut:
                 titleTextSize = pixelsToSp(this, title.getTextSize());
-                contentTextSize = pixelsToSp(this, content.getTextSize());
-                if(titleTextSize > 12f) {
+                contentTextSize = pixelsToSp(this, htmlTextView.getTextSize());
+                if (titleTextSize > 12f) {
                     title.setTextSize(titleTextSize - 2f);
-                    content.setTextSize(contentTextSize - 2f);
+                    htmlTextView.setTextSize(contentTextSize - 2f);
                 }
                 break;
 
@@ -95,7 +99,21 @@ public class FullScreenActivity extends AppCompatActivity {
 
     public static float pixelsToSp(Context context, float px) {
         float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
-        return px/scaledDensity;
+        return px / scaledDensity;
+    }
+
+    public void loadInterstitialAd() {
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (interstitialAd.isLoaded()) {
+            interstitialAd.show();
+            super.onBackPressed();
+        }else{
+            super.onBackPressed();
+        }
     }
 
 }

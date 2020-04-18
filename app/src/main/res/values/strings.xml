@@ -18,12 +18,11 @@
     <string name="economics">Economics</string>
     <string name="geography">Geography</string>
     <string name="governance_amp_social_justice"><![CDATA[Governance & Social Justice]]></string>
-    <string name="history">History</string>
     <string name="indian_society">Indian Society</string>
     <string name="international_relations">International Relations</string>
     <string name="polity">Polity</string>
     <string name="science_amp_technology"><![CDATA[Science & Technology]]></string>
-    <string name="vividha">Vividha</string>
+    <string name="miscellaneous">Miscellaneous</string>
     <string name="home">Home</string>
     <string name="category">Category</string>
     <string name="communicate">Communicate</string>

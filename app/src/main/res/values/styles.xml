@@ -3,11 +3,10 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-<!--        <item name="android:textColorPrimary">@color/primaryTextColor</item>-->
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="android:textColorSecondary">@color/secondaryTextColor</item>
 
-<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+
     </style>
 
     <style name="AppTheme.TransStatusBar" parent="Theme.MaterialComponents.Light.NoActionBar">

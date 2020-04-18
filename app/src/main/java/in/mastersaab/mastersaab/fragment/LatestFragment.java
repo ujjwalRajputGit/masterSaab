@@ -14,12 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import in.mastersaab.mastersaab.R;
 import in.mastersaab.mastersaab.adapter.FirestoreAdapter;
@@ -66,22 +62,9 @@ public class LatestFragment extends Fragment {
                 .setLifecycleOwner(this)
                 .setQuery(query, config, ContentData.class)
                 .build();
-        
+
         FirestoreAdapter firestorePagingAdapter = new FirestoreAdapter(options);
         recyclerView.setAdapter(firestorePagingAdapter);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("state", "activity start1");
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("state", "activity stop1");
     }
 
     private void setQuery() {
@@ -130,11 +113,6 @@ public class LatestFragment extends Fragment {
                         .whereEqualTo("category","Governance And Social Justice")
                         .orderBy("date", Query.Direction.ASCENDING);
                 break;
-            case "history":
-                query = firebaseFirestore.collection("Content")
-                        .whereEqualTo("category","History")
-                        .orderBy("date", Query.Direction.ASCENDING);
-                break;
             case "indianSociety":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","IndianSociety")
@@ -155,14 +133,14 @@ public class LatestFragment extends Fragment {
                         .whereEqualTo("category","Science And Technology")
                         .orderBy("date", Query.Direction.ASCENDING);
                 break;
-            case "vividha":
+            case "miscellaneous":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Vividha")
                         .orderBy("date", Query.Direction.ASCENDING);
                 break;
             default:
                 query = firebaseFirestore.collection("Content")
-                        .orderBy("date", Query.Direction.DESCENDING);
+                        .orderBy("date", Query.Direction.ASCENDING);
         }
 
         fetchData(query);
