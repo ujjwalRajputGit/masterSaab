@@ -5,8 +5,10 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -28,6 +30,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.Objects;
 
 import in.mastersaab.mastersaab.R;
+import in.mastersaab.mastersaab.adapter.FirestoreAdapter;
 import in.mastersaab.mastersaab.adapter.ViewPagerAdapter;
 import in.mastersaab.mastersaab.fragment.LatestFragment;
 import in.mastersaab.mastersaab.fragment.TrendingFragment;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private String previousData ="default";
+
+    private AdView adView;
 
     private TrendingFragment trendingFragment = new TrendingFragment();
     private LatestFragment latestFragment = new LatestFragment();
@@ -49,9 +54,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 
         //initialising Banner Ad
-        AdView adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-
+        FrameLayout adContainerView = findViewById(R.id.ad_view_container);
+        adView = new AdView(this);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adContainerView.addView(adView);
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         //adding the toolbar
@@ -68,15 +74,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
 
         //adding fragment to viewPager Adapter start
-        viewPagerAdapter.addFragment(latestFragment, "नवीनतम");
-        viewPagerAdapter.addFragment(trendingFragment, "ट्रेंडिंग");
+        viewPagerAdapter.addFragment(latestFragment, "Latest");
+        viewPagerAdapter.addFragment(trendingFragment, "Trending");
 
         //adding viewPager Adapter
         viewPager.setAdapter(viewPagerAdapter);
 
         //adding icon to tab layout start
-        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.ic_new_icon_black);
-        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.ic_trending_icon_black);
+//        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.ic_new_icon_black);
+//        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.ic_trending_icon_black);
 
 
         //navigation drawer start
@@ -97,8 +103,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //loading Ad
-        adView.loadAd(adRequest);
+        loadBanner();
 
+    }
+
+    private void loadBanner() {
+        AdRequest adRequest =
+                new AdRequest.Builder().build();
+
+        AdSize adSize = getAdSize();
+        adView.setAdSize(adSize);
+        adView.loadAd(adRequest);
+    }
+
+    private AdSize getAdSize() {
+
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        float widthPixels = outMetrics.widthPixels;
+        float density = outMetrics.density;
+        int adWidth = (int) (widthPixels / density);
+        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
     }
 
     public void drawerItemClick(String drawer_item,String title_name) {

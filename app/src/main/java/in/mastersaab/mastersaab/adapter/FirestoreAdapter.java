@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.firebase.ui.firestore.paging.LoadingState;
 
 import in.mastersaab.mastersaab.activity.FullScreenActivity;
 import in.mastersaab.mastersaab.R;
+import in.mastersaab.mastersaab.activity.MainActivity;
 import in.mastersaab.mastersaab.dataModel.ContentData;
 
 public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, FirestoreAdapter.ProductsViewHolder> {
@@ -82,7 +84,6 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
                 break;
             case LOADED:
                 Log.d("PAGING_LOG","Total Item Loaded : " + getItemCount());
-
                 break;
         }
     }
