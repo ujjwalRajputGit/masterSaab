@@ -1,5 +1,6 @@
 package in.mastersaab.mastersaab.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.Html;
 import android.util.Log;
@@ -19,6 +20,9 @@ import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.firebase.ui.firestore.paging.LoadingState;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import in.mastersaab.mastersaab.activity.FullScreenActivity;
 import in.mastersaab.mastersaab.R;
 import in.mastersaab.mastersaab.activity.MainActivity;
@@ -33,10 +37,14 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
 
     @Override
     protected void onBindViewHolder(@NonNull ProductsViewHolder holder, int position, @NonNull final ContentData model) {
-        Log.d("position","positin" + position);
 
         holder.recView_title.setText(model.getTitle());
-        holder.recView_content.setText(Html.fromHtml(model.getContent()));
+//        holder.recView_content.setText(Html.fromHtml(model.getContent()).toString());
+        holder.recView_content.setText(model.getContent().replaceAll("\\<.*?>",""));
+        //date formatting
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        String date = dateFormat.format(model.getDate());
+        holder.recView_date.setText(date);
 
         final String imageUrl = model.getImageUrl();
 
@@ -46,15 +54,13 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
                 .placeholder(R.drawable.placeholder_image)
                 .into(holder.recView_image);
 
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), FullScreenActivity.class);
-                intent.putExtra("title",model.getTitle());
-                intent.putExtra("content",model.getContent());
-                intent.putExtra("imageUrl",imageUrl);
-                v.getContext().startActivity(intent);
-            }
+        holder.view.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), FullScreenActivity.class);
+            intent.putExtra("title",model.getTitle());
+            intent.putExtra("content",model.getContent());
+            intent.putExtra("imageUrl",imageUrl);
+            intent.putExtra("date",date);
+            v.getContext().startActivity(intent);
         });
     }
 
@@ -71,18 +77,23 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
         super.onLoadingStateChanged(state);
         switch (state) {
             case LOADING_MORE:
+                MainActivity.progressMore("enable");
                 Log.d("PAGING_LOG","Loading Next Page");
                 break;
             case LOADING_INITIAL:
+                MainActivity.progressInitial("enable");
                 Log.d("PAGING_LOG","Loading Initial Data");
                 break;
             case FINISHED:
+                MainActivity.progressMore("disable");
                 Log.d("PAGING_LOG","All Data Loaded");
                 break;
             case ERROR:
                 Log.d("PAGING_LOG","ERROR Loading Data");
                 break;
             case LOADED:
+                MainActivity.progressInitial("disable");
+                MainActivity.progressMore("disable");
                 Log.d("PAGING_LOG","Total Item Loaded : " + getItemCount());
                 break;
         }
@@ -91,8 +102,9 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
     //View Holder
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView recView_title, recView_content;
+        TextView recView_title, recView_content, recView_date;
         ImageView recView_image;
+
         View view;
 
         public ProductsViewHolder(@NonNull View itemView) {
@@ -100,6 +112,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
             recView_title = itemView.findViewById(R.id.title);
             recView_content = itemView.findViewById(R.id.content);
             recView_image = itemView.findViewById(R.id.imageView);
+            recView_date = itemView.findViewById(R.id.date);
             view = itemView;
         }
     }

@@ -33,5 +33,6 @@
     <string name="environment">Environment</string>
     <string name="zoomIn">ZoomIn</string>
     <string name="zoomOut">ZoomOut</string>
+    <string name="date">date</string>
 
 </resources>

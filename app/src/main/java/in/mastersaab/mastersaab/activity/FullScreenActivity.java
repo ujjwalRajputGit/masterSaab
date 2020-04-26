@@ -27,6 +27,7 @@ import in.mastersaab.mastersaab.R;
 public class FullScreenActivity extends AppCompatActivity {
 
     private TextView title;
+    private  TextView date;
     private HtmlTextView htmlTextView;
     private InterstitialAd interstitialAd;
 
@@ -47,11 +48,13 @@ public class FullScreenActivity extends AppCompatActivity {
         Intent data = getIntent();
 
         title = findViewById(R.id.fullscreen_title);
+        date = findViewById(R.id.fullscreen_date);
         htmlTextView = findViewById(R.id.fullscreen_htmlView);
         ImageView imageView = findViewById(R.id.fullscreen_imageView);
 
 
         title.setText(data.getStringExtra("title"));
+        date.setText(data.getStringExtra("date"));
         htmlTextView.setHtml(data.getStringExtra("content"),new HtmlHttpImageGetter(htmlTextView));
         String imageUrl = data.getStringExtra("imageUrl");
 
@@ -79,16 +82,21 @@ public class FullScreenActivity extends AppCompatActivity {
             case R.id.zoomIn:
                 float titleTextSize = pixelsToSp(this, title.getTextSize());
                 float contentTextSize = pixelsToSp(this, htmlTextView.getTextSize());
+                float dateTextSize = pixelsToSp(this,date.getTextSize());
                 if (titleTextSize < 30f) {
                     title.setTextSize(titleTextSize + 2f);
+                    date.setTextSize(dateTextSize + 2f);
                     htmlTextView.setTextSize(contentTextSize + 2f);
                 }
                 break;
             case R.id.zoomOut:
                 titleTextSize = pixelsToSp(this, title.getTextSize());
                 contentTextSize = pixelsToSp(this, htmlTextView.getTextSize());
+                dateTextSize = pixelsToSp(this,date.getTextSize());
+
                 if (titleTextSize > 12f) {
                     title.setTextSize(titleTextSize - 2f);
+                    date.setTextSize(dateTextSize - 2f);
                     htmlTextView.setTextSize(contentTextSize - 2f);
                 }
                 break;

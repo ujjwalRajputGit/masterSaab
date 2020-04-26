@@ -66,19 +66,6 @@ public class TrendingFragment extends Fragment {
         recyclerView.setAdapter(firestorePagingAdapter);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("state","activity start1");
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("state","activity stop1");
-    }
-
     private void setQuery() {
 
         Bundle bundle = getArguments();
@@ -94,78 +81,78 @@ public class TrendingFragment extends Fragment {
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Art And Culture")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "defenceAndSecurity":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Defence And Security")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "disasterManagement":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Disaster Management")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "economics":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Economics")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "environment":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Environment")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "geography":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Geography")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "governanceAndSocialJustice":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Governance And Social Justice")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "indianSociety":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","IndianSociety")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "internationalRelations":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","International Relations")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "polity":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Polity")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "scienceAndTechnology":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Science And Technology")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "miscellaneous":
                 query = firebaseFirestore.collection("Content")
-                        .whereEqualTo("category","Vividha")
+                        .whereEqualTo("category","Miscellaneous")
                         .whereEqualTo("trending", true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             default:
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("trending",true)
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
 
         }
 

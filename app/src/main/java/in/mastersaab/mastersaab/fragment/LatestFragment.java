@@ -81,66 +81,66 @@ public class LatestFragment extends Fragment {
             case "artAndCulture":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Art And Culture")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "defenceAndSecurity":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Defence And Security")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "disasterManagement":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Disaster Management")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "economics":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Economics")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "environment":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Environment")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "geography":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Geography")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "governanceAndSocialJustice":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Governance And Social Justice")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "indianSociety":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","IndianSociety")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "internationalRelations":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","International Relations")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "polity":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Polity")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "scienceAndTechnology":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Science And Technology")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "miscellaneous":
                 query = firebaseFirestore.collection("Content")
-                        .whereEqualTo("category","Vividha")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .whereEqualTo("category","Miscellaneous")
+                        .orderBy("date", Query.Direction.DESCENDING);
                 break;
             default:
                 query = firebaseFirestore.collection("Content")
-                        .orderBy("date", Query.Direction.ASCENDING);
+                        .orderBy("date", Query.Direction.DESCENDING);
         }
 
         fetchData(query);
