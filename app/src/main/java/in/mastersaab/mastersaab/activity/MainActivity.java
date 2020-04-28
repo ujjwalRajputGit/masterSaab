@@ -318,6 +318,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerItemClick("governanceAndSocialJustice", "Governance & SocialJustice");
 
                 break;
+            case R.id.nav_history:
+                drawerItemClick("history", "History");
+
+                break;
             case R.id.nav_indianSociety:
                 drawerItemClick("indianSociety", "Indian Society");
 

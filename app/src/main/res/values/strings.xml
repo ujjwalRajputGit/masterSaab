@@ -34,5 +34,6 @@
     <string name="zoomIn">ZoomIn</string>
     <string name="zoomOut">ZoomOut</string>
     <string name="date">date</string>
+    <string name="history">History</string>
 
 </resources>

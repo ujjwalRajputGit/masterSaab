@@ -113,9 +113,14 @@ public class LatestFragment extends Fragment {
                         .whereEqualTo("category","Governance And Social Justice")
                         .orderBy("date", Query.Direction.DESCENDING);
                 break;
+            case "history":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","History")
+                        .orderBy("date", Query.Direction.DESCENDING);
+                break;
             case "indianSociety":
                 query = firebaseFirestore.collection("Content")
-                        .whereEqualTo("category","IndianSociety")
+                        .whereEqualTo("category","Indian Society")
                         .orderBy("date", Query.Direction.DESCENDING);
                 break;
             case "internationalRelations":

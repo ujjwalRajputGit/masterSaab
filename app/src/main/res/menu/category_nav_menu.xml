@@ -38,6 +38,10 @@
                     android:title="@string/governance_amp_social_justice" />
 
                 <item
+                    android:id="@+id/nav_history"
+                    android:title="@string/history"/>
+
+                <item
                     android:id="@+id/nav_indianSociety"
                     android:title="@string/indian_society" />
 

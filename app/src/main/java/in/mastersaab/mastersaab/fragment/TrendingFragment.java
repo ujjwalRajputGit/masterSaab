@@ -119,9 +119,15 @@ public class TrendingFragment extends Fragment {
                         .whereEqualTo("trending", true)
                         .orderBy("date", Query.Direction.DESCENDING);
                 break;
+            case "history":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","History")
+                        .whereEqualTo("trending", true)
+                        .orderBy("date", Query.Direction.DESCENDING);
+                break;
             case "indianSociety":
                 query = firebaseFirestore.collection("Content")
-                        .whereEqualTo("category","IndianSociety")
+                        .whereEqualTo("category","Indian Society")
                         .whereEqualTo("trending", true)
                         .orderBy("date", Query.Direction.DESCENDING);
                 break;
