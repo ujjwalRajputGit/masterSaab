@@ -50,16 +50,16 @@
                     android:title="@string/international_relations" />
 
                 <item
+                    android:id="@+id/nav_miscellaneous"
+                    android:title="@string/miscellaneous" />
+
+                <item
                     android:id="@+id/nav_polity"
                     android:title="@string/polity" />
 
                 <item
                     android:id="@+id/nav_scienceAndTechnology"
                     android:title="@string/science_amp_technology" />
-
-                <item
-                    android:id="@+id/nav_miscellaneous"
-                    android:title="@string/miscellaneous" />
 
             </group>
         </menu>

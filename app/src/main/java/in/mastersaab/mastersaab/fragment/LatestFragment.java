@@ -128,6 +128,11 @@ public class LatestFragment extends Fragment {
                         .whereEqualTo("category","International Relations")
                         .orderBy("date", Query.Direction.DESCENDING);
                 break;
+            case "miscellaneous":
+                query = firebaseFirestore.collection("Content")
+                        .whereEqualTo("category","Miscellaneous")
+                        .orderBy("date", Query.Direction.DESCENDING);
+                break;
             case "polity":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Polity")
@@ -136,11 +141,6 @@ public class LatestFragment extends Fragment {
             case "scienceAndTechnology":
                 query = firebaseFirestore.collection("Content")
                         .whereEqualTo("category","Science And Technology")
-                        .orderBy("date", Query.Direction.DESCENDING);
-                break;
-            case "miscellaneous":
-                query = firebaseFirestore.collection("Content")
-                        .whereEqualTo("category","Miscellaneous")
                         .orderBy("date", Query.Direction.DESCENDING);
                 break;
             default:

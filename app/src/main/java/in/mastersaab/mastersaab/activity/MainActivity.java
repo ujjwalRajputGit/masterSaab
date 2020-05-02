@@ -1,6 +1,7 @@
 package in.mastersaab.mastersaab.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -275,14 +276,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.inflateMenu(R.menu.category_nav_menu);
                 navigationView.setNavigationItemSelectedListener(this);
                 break;
-            case R.id.nav_contactUs:
-
-                break;
             case R.id.nav_about:
-
+                Intent intent = new Intent(this, CommunicateActivity.class);
+                intent.putExtra("fragment", "About masterSaab");
+                startActivity(intent);
                 break;
-            case R.id.nav_Privacy:
-
+            case R.id.nav_contact:
+                intent = new Intent(this, CommunicateActivity.class);
+                intent.putExtra("fragment", "Contact us");
+                startActivity(intent);
+                break;
+            case R.id.nav_Privacy_Policy:
+                intent = new Intent(this, CommunicateActivity.class);
+                intent.putExtra("fragment", "Privacy Policy");
+                startActivity(intent);
                 break;
             case R.id.nav_BackPress:
                 navigationView.getMenu().clear(); //clear old inflated items.
@@ -330,16 +337,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerItemClick("internationalRelations", "International Relations");
 
                 break;
+            case R.id.nav_miscellaneous:
+                drawerItemClick("miscellaneous", "Miscellaneous");
+
+                break;
             case R.id.nav_polity:
                 drawerItemClick("polity", "polity");
 
                 break;
             case R.id.nav_scienceAndTechnology:
                 drawerItemClick("scienceAndTechnology", "Science & Technology");
-
-                break;
-            case R.id.nav_miscellaneous:
-                drawerItemClick("miscellaneous", "Miscellaneous");
 
                 break;
 

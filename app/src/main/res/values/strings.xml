@@ -4,14 +4,9 @@
     <string name="closeNavDrawer">Navigation Drawer Close</string>
     <string name="heading">Heading</string>
     <string name="content">Content are the big field</string>
-    <!-- Strings used for fragments for navigation -->
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="title">title</string>
     <string name="image_related_to_content">image related to content</string>
-    <string name="user_image">user image</string>
-    <string name="username">username</string>
-    <string name="email">abc@xyz.com</string>
+    <string name="masterSaab_logo">masterSaab_logo</string>
     <string name="art_amp_culture"><![CDATA[Art & Culture]]></string>
     <string name="defence_amp_security"><![CDATA[Defence & Security]]></string>
     <string name="disaster_management">Disaster Management</string>
@@ -26,8 +21,8 @@
     <string name="home">Home</string>
     <string name="category">Category</string>
     <string name="communicate">Communicate</string>
-    <string name="contact_us">Contact</string>
-    <string name="about">About us</string>
+    <string name="contact">Contact us</string>
+    <string name="about">About masterSaab</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="back">Back</string>
     <string name="environment">Environment</string>
@@ -35,5 +30,44 @@
     <string name="zoomOut">ZoomOut</string>
     <string name="date">date</string>
     <string name="history">History</string>
+    <string name="instagram_icon">instagram_icon</string>
+    <string name="twitter_icon">twitter_icon</string>
+    <string name="facebook_icon">facebook_icon</string>
+
+    <string name="contact_content">We would love you hear from you. Let us know if you are facing any problems, have any questions or want to share feedback. \n\nWe are always happy to help!
+        \n\n Student Contact Center
+        \n support@mastersaab.in
+        \n\n For Any Business Enquiry
+        \n contact@mastersaab.in
+        \n\n Follow Us On Social Media
+    </string>
+
+    <string name="about_content1">masterSaab is India\'s new learning platform.
+        \n\nSarkari Exam Oriented Daily Current Affairs &amp; GK  : UPSC, RRB, SSC &amp; Banking.
+        \n\nSarkari Exam Oriented Daily Current Affairs &amp; GK  : UPSC, RRB, SSC &amp; Banking.
+        \n\nmasterSaab - India\'s new learning platform to learn Current Affairs for Civil Services, UPPSC, BPSC, CDS, NDA, Bank, SSC &amp; Railways exams in Hindi. Now master General Knowledge and Awareness anywhere, anytime for free.
+
+    </string>
+
+    <string name="about_content2">
+        \nWe believe that these exams can make a huge impact in a student\'s life. We help them prepare actively for these exams &amp; score better.
+    </string>
+
+    <string name="about_content3">
+        \nEverything is carefully selected by a team of masterSaab keeping your exam needs in mind.
+    </string>
+
+    <string name="privacy_content">PRIVACY POLICY
+\n\nThe following privacy policy is being published in accordance with the provisions of the Information Technology Act, 2000 ("IT ACT"), Information Technology (Intermediary Guidelines) Rules, 2011, Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011.
+\n\nThe Privacy Policy here explains the policy masterSaab  of app, with respect to the disclosure, collection, storage, usage and protection of your information during the course of your interaction with  the App.
+
+\n\n\nPlease read the Privacy Policy carefully in conjunction with the Terms of Use as stated under IT Act. In case, you do not understand this policy, or do not accept any part of the policy mentioned, then you should refrain from using the Platform altogether. Your and/or continued use of the Platform, amounts to an express consent to the terms of Privacy Policy as well as the Terms of Use.
+
+\n\n\nFor the purposes of this Policy, access of the Website and the App together with any study material. made available or uploaded therein or downloaded, embedded therefrom shall collectively be referred to as the “Services”.
+
+\n\n\nThis Privacy Policy forms part and parcel of the Terms of Use for theasterSaab Services and shall be read as a whole. Capitalized terms used here, but undefined, shall have the same meaning as attributed to them in the Terms of Use.
+\nSECURITY OF INFORMATION COLLECTED
+\nWe take the security of your personal information seriously and use appropriate technical and organizational measures to protect your personal information against unauthorized or unlawful processing and against accidental loss, destruction or damage. Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data which is transmitted to or from the Service. Any transmission is at your own risk.
+\nWe keep your personal information for no longer than is necessary for our business purposes or for legal requirements.</string>
 
 </resources>

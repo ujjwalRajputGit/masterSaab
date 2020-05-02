@@ -3,7 +3,9 @@ package in.mastersaab.mastersaab.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,7 +47,7 @@ public class FullScreenActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Intent data = getIntent();
+        Intent intentData = getIntent();
 
         title = findViewById(R.id.fullscreen_title);
         date = findViewById(R.id.fullscreen_date);
@@ -53,10 +55,10 @@ public class FullScreenActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.fullscreen_imageView);
 
 
-        title.setText(data.getStringExtra("title"));
-        date.setText(data.getStringExtra("date"));
-        htmlTextView.setHtml(data.getStringExtra("content"),new HtmlHttpImageGetter(htmlTextView));
-        String imageUrl = data.getStringExtra("imageUrl");
+        title.setText(intentData.getStringExtra("title"));
+        date.setText(intentData.getStringExtra("date"));
+        htmlTextView.setHtml(intentData.getStringExtra("content"),new HtmlHttpImageGetter(htmlTextView));
+        String imageUrl = intentData.getStringExtra("imageUrl");
 
         Glide.with(this)
                 .load(imageUrl)
