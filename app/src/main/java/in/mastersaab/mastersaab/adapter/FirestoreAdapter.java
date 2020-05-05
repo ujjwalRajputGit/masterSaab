@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -86,6 +87,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
                 break;
             case FINISHED:
                 MainActivity.progressMore("disable");
+                MainActivity.progressInitial("disable");
                 Log.d("PAGING_LOG","All Data Loaded");
                 break;
             case ERROR:

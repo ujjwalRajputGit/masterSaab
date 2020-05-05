@@ -70,4 +70,9 @@
 \nWe take the security of your personal information seriously and use appropriate technical and organizational measures to protect your personal information against unauthorized or unlawful processing and against accidental loss, destruction or damage. Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data which is transmitted to or from the Service. Any transmission is at your own risk.
 \nWe keep your personal information for no longer than is necessary for our business purposes or for legal requirements.</string>
 
+    <string name="share_app">Share App</string>
+    <string name="rate_app">Rate App</string>
+    <string name="play_store_link">https://play.google.com/store/apps/details?id=</string>
+    <string name="share_button_content">Study anytime, anywhere for free, Download masterSaab is India\'s new learning platform, to read Current Affairs for Civil Services, CDS, NDA, Bank, SSC &amp; Railways exams in Hindi.\n</string>
+
 </resources>

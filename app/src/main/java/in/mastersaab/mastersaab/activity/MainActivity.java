@@ -3,11 +3,15 @@ package in.mastersaab.mastersaab.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //initialising Banner Ad
         FrameLayout adContainerView = findViewById(R.id.ad_view_container);
         adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdUnitId("ca-app-pub-4795345397592549/3912626714");
         adContainerView.addView(adView);
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
@@ -185,9 +189,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Snackbar snackbar =
                 Snackbar.make(
                         findViewById(R.id.update_snakeBar),
-                        "An update has just been downloaded.",
+                        "An update just been downloaded.",
                         Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction("RESTART", view -> appUpdateManager.completeUpdate());
+        snackbar.setAction("INSTALL", view -> appUpdateManager.completeUpdate());
         snackbar.setActionTextColor(
                 getResources().getColor(R.color.secondaryColor));
         snackbar.show();
@@ -290,6 +294,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, CommunicateActivity.class);
                 intent.putExtra("fragment", "Privacy Policy");
                 startActivity(intent);
+                break;
+            case R.id.nav_rate_app:
+                Uri uri = Uri.parse(getString(R.string.play_store_link) + getPackageName());
+                Intent rateIntent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(rateIntent);
+                break;
+            case R.id.nav_share_app:
+                Uri uriToImage = Uri.parse("android.resource://"
+                        + getPackageName()
+                        +"/drawable/share_image");
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.play_store_link)
+                        + getPackageName());
+                shareIntent.setType("text/plain");
+
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uriToImage);
+                shareIntent.setType("image/jpg");
+
+                startActivity(Intent.createChooser(shareIntent, "Share with"));
                 break;
             case R.id.nav_BackPress:
                 navigationView.getMenu().clear(); //clear old inflated items.

@@ -3,9 +3,8 @@ package in.mastersaab.mastersaab.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Layout;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,7 +39,7 @@ public class FullScreenActivity extends AppCompatActivity {
 
         // Initialize the InterstitialAd
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        interstitialAd.setAdUnitId("ca-app-pub-4795345397592549/2275632480");
 
         Toolbar toolbar = findViewById(R.id.fullscreen_toolbar);
         setSupportActionBar(toolbar);
@@ -113,7 +112,13 @@ public class FullScreenActivity extends AppCompatActivity {
     }
 
     public void loadInterstitialAd() {
-        interstitialAd.loadAd(new AdRequest.Builder().build());
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        },10000);
+
     }
 
     @Override

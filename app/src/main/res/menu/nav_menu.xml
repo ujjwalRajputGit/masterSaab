@@ -35,4 +35,18 @@
         </menu>
     </item>
 
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_rate_app"
+            android:checkable="false"
+            android:title="@string/rate_app" />
+
+        <item
+            android:id="@+id/nav_share_app"
+            android:checkable="false"
+            android:title="@string/share_app" />
+
+    </group>
+
 </menu>
