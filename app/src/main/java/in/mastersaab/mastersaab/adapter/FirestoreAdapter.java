@@ -41,14 +41,15 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
 
         holder.recView_title.setText(model.getTitle());
 //        holder.recView_content.setText(Html.fromHtml(model.getContent()).toString());
-        holder.recView_content.setText(model.getContent().replaceAll("\\<.*?>",""));
+        holder.recView_content.setText(model.getContent().replaceAll("<.*?>",""));
         //date formatting
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
         String date = dateFormat.format(model.getDate());
         holder.recView_date.setText(date);
 
-        final String imageUrl = model.getImageUrl();
+        holder.recView_document_id.setText(model.getDocument_id());
 
+        final String imageUrl = model.getImageUrl();
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
                 .centerCrop()
@@ -61,6 +62,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
             intent.putExtra("content",model.getContent());
             intent.putExtra("imageUrl",imageUrl);
             intent.putExtra("date",date);
+            intent.putExtra("document id",model.getDocument_id());
             v.getContext().startActivity(intent);
         });
     }
@@ -104,7 +106,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
     //View Holder
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView recView_title, recView_content, recView_date;
+        TextView recView_title, recView_content, recView_date, recView_document_id;
         ImageView recView_image;
 
         View view;
@@ -115,6 +117,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
             recView_content = itemView.findViewById(R.id.content);
             recView_image = itemView.findViewById(R.id.imageView);
             recView_date = itemView.findViewById(R.id.date);
+            recView_document_id = itemView.findViewById(R.id.document_id);
             view = itemView;
         }
     }

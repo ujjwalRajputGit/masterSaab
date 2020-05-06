@@ -4,7 +4,6 @@ package in.mastersaab.mastersaab.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -29,17 +26,13 @@ public class FullScreenActivity extends AppCompatActivity {
 
     private TextView title;
     private  TextView date;
+    private  TextView documentId;
     private HtmlTextView htmlTextView;
-    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_srcreen);
-
-        // Initialize the InterstitialAd
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-4795345397592549/2275632480");
 
         Toolbar toolbar = findViewById(R.id.fullscreen_toolbar);
         setSupportActionBar(toolbar);
@@ -50,12 +43,14 @@ public class FullScreenActivity extends AppCompatActivity {
 
         title = findViewById(R.id.fullscreen_title);
         date = findViewById(R.id.fullscreen_date);
+        documentId = findViewById(R.id.fullscreen_document_id);
         htmlTextView = findViewById(R.id.fullscreen_htmlView);
         ImageView imageView = findViewById(R.id.fullscreen_imageView);
 
 
         title.setText(intentData.getStringExtra("title"));
         date.setText(intentData.getStringExtra("date"));
+        documentId.setText(intentData.getStringExtra("document id"));
         htmlTextView.setHtml(intentData.getStringExtra("content"),new HtmlHttpImageGetter(htmlTextView));
         String imageUrl = intentData.getStringExtra("imageUrl");
 
@@ -64,7 +59,6 @@ public class FullScreenActivity extends AppCompatActivity {
                 .placeholder(R.drawable.placeholder_image)
                 .into(imageView);
 
-        loadInterstitialAd();
     }
 
     @Override
@@ -84,9 +78,11 @@ public class FullScreenActivity extends AppCompatActivity {
                 float titleTextSize = pixelsToSp(this, title.getTextSize());
                 float contentTextSize = pixelsToSp(this, htmlTextView.getTextSize());
                 float dateTextSize = pixelsToSp(this,date.getTextSize());
+                float documentIdTextSize = pixelsToSp(this,documentId.getTextSize());
                 if (titleTextSize < 30f) {
                     title.setTextSize(titleTextSize + 2f);
                     date.setTextSize(dateTextSize + 2f);
+                    documentId.setTextSize(documentIdTextSize + 2f);
                     htmlTextView.setTextSize(contentTextSize + 2f);
                 }
                 break;
@@ -94,10 +90,12 @@ public class FullScreenActivity extends AppCompatActivity {
                 titleTextSize = pixelsToSp(this, title.getTextSize());
                 contentTextSize = pixelsToSp(this, htmlTextView.getTextSize());
                 dateTextSize = pixelsToSp(this,date.getTextSize());
+                documentIdTextSize = pixelsToSp(this,documentId.getTextSize());
 
                 if (titleTextSize > 12f) {
                     title.setTextSize(titleTextSize - 2f);
                     date.setTextSize(dateTextSize - 2f);
+                    documentId.setTextSize(documentIdTextSize - 2f);
                     htmlTextView.setTextSize(contentTextSize - 2f);
                 }
                 break;
@@ -110,25 +108,4 @@ public class FullScreenActivity extends AppCompatActivity {
         float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
         return px / scaledDensity;
     }
-
-    public void loadInterstitialAd() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        },10000);
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (interstitialAd.isLoaded()) {
-            interstitialAd.show();
-            super.onBackPressed();
-        }else{
-            super.onBackPressed();
-        }
-    }
-
 }

@@ -2,17 +2,10 @@ package in.mastersaab.mastersaab.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -24,22 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.InstallState;
-import com.google.android.play.core.install.InstallStateUpdatedListener;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.InstallStatus;
-import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.play.core.tasks.Task;
 
 import java.util.Objects;
 
@@ -55,15 +34,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressLint("StaticFieldLeak")
     private static ProgressBar progressBarMore;
 
-    private static final int MY_REQUEST_CODE = 2020;
-    private AppUpdateManager appUpdateManager;
-    private Task<AppUpdateInfo> appUpdateInfoTask;
-
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private String previousData ="default";
-
-    private AdView adView;
 
     private TrendingFragment trendingFragment = new TrendingFragment();
     private LatestFragment latestFragment = new LatestFragment();
@@ -76,15 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBarInitial = findViewById(R.id.progressBar_initial);
         progressBarMore = findViewById(R.id.progressBar_more);
 
-        MobileAds.initialize(this, initializationStatus -> {
-
-        });
-
-        //initialising Banner Ad
-        FrameLayout adContainerView = findViewById(R.id.ad_view_container);
-        adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-4795345397592549/3912626714");
-        adContainerView.addView(adView);
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         //adding the toolbar
@@ -129,118 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        //loading Ad
-        loadBanner();
-
-        //app update
-        appUpdateManager = AppUpdateManagerFactory.create(this);
-        appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
-        appUpdateChecker();
-
-    }
-
-    private void appUpdateChecker() {
-        appUpdateManager.registerListener(installStateUpdatedListener);
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                if (appUpdateInfo.clientVersionStalenessDays() > 5 &&
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(appUpdateInfo,
-                                AppUpdateType.IMMEDIATE,
-                                this,
-                                MY_REQUEST_CODE);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
-                    }
-
-                } else if (appUpdateInfo.clientVersionStalenessDays() != null &&
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(appUpdateInfo,
-                                AppUpdateType.FLEXIBLE,
-                                this,
-                                MY_REQUEST_CODE);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        });
-    }
-
-    InstallStateUpdatedListener installStateUpdatedListener = new
-            InstallStateUpdatedListener() {
-                @Override
-                public void onStateUpdate(InstallState state) {
-                    if (state.installStatus() == InstallStatus.DOWNLOADED){
-                        popupSnackBarForCompleteUpdate();
-                    } else if (state.installStatus() == InstallStatus.INSTALLED){
-                        if (appUpdateManager != null){
-                            appUpdateManager.unregisterListener(installStateUpdatedListener);
-                        }
-
-                    }
-                }
-            };
-
-    private void popupSnackBarForCompleteUpdate() {
-        Snackbar snackbar =
-                Snackbar.make(
-                        findViewById(R.id.update_snakeBar),
-                        "An update just been downloaded.",
-                        Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction("INSTALL", view -> appUpdateManager.completeUpdate());
-        snackbar.setActionTextColor(
-                getResources().getColor(R.color.secondaryColor));
-        snackbar.show();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        appUpdateManager
-                .getAppUpdateInfo()
-                .addOnSuccessListener(appUpdateInfo -> {
-                    if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                        popupSnackBarForCompleteUpdate();
-                    }
-                    else if (appUpdateInfo.updateAvailability()
-                            == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                        try {
-                            appUpdateManager.startUpdateFlowForResult(
-                                    appUpdateInfo,
-                                    AppUpdateType.FLEXIBLE,
-                                    this,
-                                    MY_REQUEST_CODE);
-                        } catch (IntentSender.SendIntentException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-    }
-
-    private void loadBanner() {
-        AdRequest adRequest =
-                new AdRequest.Builder().build();
-
-        AdSize adSize = getAdSize();
-        adView.setAdSize(adSize);
-        adView.loadAd(adRequest);
-    }
-
-    private AdSize getAdSize() {
-
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        display.getMetrics(outMetrics);
-
-        float widthPixels = outMetrics.widthPixels;
-        float density = outMetrics.density;
-        int adWidth = (int) (widthPixels / density);
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth);
     }
 
     public void drawerItemClick(String drawer_item,String title_name) {
