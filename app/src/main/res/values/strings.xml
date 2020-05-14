@@ -75,4 +75,10 @@
     <string name="play_store_link">https://play.google.com/store/apps/details?id=</string>
     <string name="share_button_content">Study anytime, anywhere for free, Download masterSaab is India\'s new learning platform, to read Current Affairs for Civil Services, CDS, NDA, Bank, SSC &amp; Railways exams in Hindi.\n</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in_with_phone">Sign in with phone</string>
+    <string name="sign_in_with_email">Sign in with email</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+
 </resources>

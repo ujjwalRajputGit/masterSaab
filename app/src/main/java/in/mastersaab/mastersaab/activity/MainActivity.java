@@ -6,12 +6,9 @@ import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -28,6 +25,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -40,6 +42,7 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -76,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressBarInitial = findViewById(R.id.progressBar_initial);
         progressBarMore = findViewById(R.id.progressBar_more);
 
+        FloatingActionButton signOut = findViewById(R.id.logout);
+        signOut.setOnClickListener(view -> {
+            signOut();
+        });
+
         MobileAds.initialize(this, initializationStatus -> {
 
         });
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //initialising Banner Ad
         FrameLayout adContainerView = findViewById(R.id.ad_view_container);
         adView = new AdView(this);
-        adView.setAdUnitId("ca-app-pub-4795345397592549/3912626714");
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
         adContainerView.addView(adView);
 
         Toolbar toolbar = findViewById(R.id.main_toolbar);
@@ -407,4 +415,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    public void signOut() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mGoogleSignInClient.signOut().addOnCompleteListener(task -> FirebaseAuth.getInstance().signOut());
+        Snackbar.make(findViewById(R.id.main), "Sign out Successfully!.", Snackbar.LENGTH_SHORT).show();
+        startAuthenticationActivity();
+    }
+
+    private void startAuthenticationActivity() {
+        Intent intent = new Intent(this, AuthenticationActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

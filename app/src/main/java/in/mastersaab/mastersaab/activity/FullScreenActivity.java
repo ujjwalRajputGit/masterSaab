@@ -39,7 +39,7 @@ public class FullScreenActivity extends AppCompatActivity {
 
         // Initialize the InterstitialAd
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-4795345397592549/2275632480");
+        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 
         Toolbar toolbar = findViewById(R.id.fullscreen_toolbar);
         setSupportActionBar(toolbar);

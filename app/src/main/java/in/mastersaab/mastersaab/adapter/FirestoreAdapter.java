@@ -2,15 +2,12 @@ package in.mastersaab.mastersaab.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +17,11 @@ import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.firebase.ui.firestore.paging.LoadingState;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import in.mastersaab.mastersaab.activity.FullScreenActivity;
 import in.mastersaab.mastersaab.R;
+import in.mastersaab.mastersaab.activity.FullScreenActivity;
 import in.mastersaab.mastersaab.activity.MainActivity;
 import in.mastersaab.mastersaab.dataModel.ContentData;
 
@@ -41,7 +37,7 @@ public class FirestoreAdapter extends FirestorePagingAdapter<ContentData, Firest
 
         holder.recView_title.setText(model.getTitle());
 //        holder.recView_content.setText(Html.fromHtml(model.getContent()).toString());
-        holder.recView_content.setText(model.getContent().replaceAll("\\<.*?>",""));
+        holder.recView_content.setText(model.getContent().replaceAll("<.*?>",""));
         //date formatting
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
         String date = dateFormat.format(model.getDate());

@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_icon_mastersaab_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CommunicateActivity"
+        <activity android:name=".activity.AuthenticationActivity" />
+        <activity
+            android:name=".activity.CommunicateActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -36,7 +38,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4795345397592549~4120436896" />
+            android:value="ca-app-pub-3940256099942544~3347511713" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification_icon" />
