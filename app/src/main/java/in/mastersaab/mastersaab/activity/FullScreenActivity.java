@@ -112,12 +112,7 @@ public class FullScreenActivity extends AppCompatActivity {
     }
 
     public void loadInterstitialAd() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        },10000);
+        new Handler().postDelayed(() -> interstitialAd.loadAd(new AdRequest.Builder().build()),10000);
 
     }
 

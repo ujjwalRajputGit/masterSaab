@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FloatingActionButton signOut = findViewById(R.id.logout);
         signOut.setOnClickListener(view -> {
             signOut();
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         });
 
         MobileAds.initialize(this, initializationStatus -> {
@@ -417,13 +420,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void signOut() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mGoogleSignInClient.signOut().addOnCompleteListener(task -> FirebaseAuth.getInstance().signOut());
-        Snackbar.make(findViewById(R.id.main), "Sign out Successfully!.", Snackbar.LENGTH_SHORT).show();
-        startAuthenticationActivity();
+        mGoogleSignInClient.signOut();
+        FirebaseAuth.getInstance().signOut();
+
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "Sign out Successfully!.", Snackbar.LENGTH_SHORT);
+        snackbar.show();
+        snackbar.addCallback(new Snackbar.Callback(){
+            @Override
+            public void onDismissed(Snackbar transientBottomBar, int event) {
+                super.onDismissed(transientBottomBar, event);
+                startAuthenticationActivity();
+            }
+        });
+
     }
 
     private void startAuthenticationActivity() {

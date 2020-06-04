@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,14 +25,23 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import in.mastersaab.mastersaab.R;
+import in.mastersaab.mastersaab.fragment.authentication.EmailSignInFragment;
+import in.mastersaab.mastersaab.fragment.authentication.PhoneAuthFragment;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
 
     private static final int RC_SIGN_IN = 6998;
     private static final String TAG = "google";
-    GoogleSignInClient mGoogleSignInClient;
-    FirebaseAuth mAuth;
+    GoogleSignInClient googleSignInClient;
+    FirebaseAuth firebaseAuth;
+
+    private static FragmentManager fragmentManager;
+    private static FragmentTransaction fragmentTransaction;
+    private EmailSignInFragment emailSignInFragment;
+    private PhoneAuthFragment phoneAuthFragment;
+
+    private Group allSignInGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,42 +51,48 @@ public class AuthenticationActivity extends AppCompatActivity {
         Button googleSignInButton = findViewById(R.id.google_signInButton);
         Button emailSignInButton = findViewById(R.id.email_signInButton);
         Button phoneSignInButton = findViewById(R.id.phone_signInButton);
-        mAuth = FirebaseAuth.getInstance();
+
+        allSignInGroup = findViewById(R.id.allSignIn_group);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        fragmentManager = getSupportFragmentManager();
+        emailSignInFragment = new EmailSignInFragment();
+        phoneAuthFragment = new PhoneAuthFragment();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Fragment fragment = fragmentManager.findFragmentById(R.id.authentication);
+        if (fragment != null) {
+            allSignInGroup.setVisibility(View.GONE);
+        }
 
-        googleSignInButton.setOnClickListener(view -> {
-            signIn("google");
-        });
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        emailSignInButton.setOnClickListener(view -> {
-            signIn("email");
-        });
+        googleSignInButton.setOnClickListener(view -> signIn("google"));
 
-        phoneSignInButton.setOnClickListener(view -> {
-            signIn("phone");
-        });
+        emailSignInButton.setOnClickListener(view -> signIn("email"));
+
+        phoneSignInButton.setOnClickListener(view -> signIn("phone"));
 
     }
-
 
     private void signIn(String signIn) {
         switch (signIn) {
             case "google":
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                Intent signInIntent = googleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
                 break;
             case "email":
-                //email sign in here
+                addFragment(emailSignInFragment);
+                allSignInGroup.setVisibility(View.GONE);
                 break;
             case "phone":
-                //phone sign in here
+                addFragment(phoneAuthFragment);
+                allSignInGroup.setVisibility(View.GONE);
                 break;
         }
 
@@ -101,17 +120,15 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
+        firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithCredential:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
 //                        Snackbar.make(findViewById(R.id.main), "Sign in Success", Snackbar.LENGTH_SHORT).show();
 //                            updateUI(user);
                         startMainActivity();
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Snackbar.make(findViewById(R.id.authentication), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
 //                            updateUI(null);
@@ -126,4 +143,23 @@ public class AuthenticationActivity extends AppCompatActivity {
         finish();
     }
 
+    public static void addFragment(Fragment fragment) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.authentication, fragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = fragmentManager.findFragmentById(R.id.authentication);
+        if (fragment != null) {
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(fragment);
+            fragmentTransaction.commit();
+            allSignInGroup.setVisibility(View.VISIBLE);
+        }else {
+            super.onBackPressed();
+        }
+
+    }
 }

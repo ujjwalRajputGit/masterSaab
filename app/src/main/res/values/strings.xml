@@ -65,7 +65,7 @@
 
 \n\n\nFor the purposes of this Policy, access of the Website and the App together with any study material. made available or uploaded therein or downloaded, embedded therefrom shall collectively be referred to as the “Services”.
 
-\n\n\nThis Privacy Policy forms part and parcel of the Terms of Use for theasterSaab Services and shall be read as a whole. Capitalized terms used here, but undefined, shall have the same meaning as attributed to them in the Terms of Use.
+\n\n\nThis Privacy Policy forms part and parcel of the Terms of Use for themasterSaab Services and shall be read as a whole. Capitalized terms used here, but undefined, shall have the same meaning as attributed to them in the Terms of Use.
 \nSECURITY OF INFORMATION COLLECTED
 \nWe take the security of your personal information seriously and use appropriate technical and organizational measures to protect your personal information against unauthorized or unlawful processing and against accidental loss, destruction or damage. Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data which is transmitted to or from the Service. Any transmission is at your own risk.
 \nWe keep your personal information for no longer than is necessary for our business purposes or for legal requirements.</string>
@@ -75,10 +75,31 @@
     <string name="play_store_link">https://play.google.com/store/apps/details?id=</string>
     <string name="share_button_content">Study anytime, anywhere for free, Download masterSaab is India\'s new learning platform, to read Current Affairs for Civil Services, CDS, NDA, Bank, SSC &amp; Railways exams in Hindi.\n</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in_with_phone">Sign in with phone</string>
     <string name="sign_in_with_email">Sign in with email</string>
     <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forget_password">forget password?</string>
+    <string name="create_account">create an account</string>
+    <string name="conform_password">Conform password</string>
+    <string name="full_name">Full name</string>
+    <string name="sign_up">Sign up</string>
+    <string name="your_phone_number">Your Phone Number</string>
+    <string name="_91">+91</string>
+    <string name="verify_your_number">Verify Your Number</string>
+    <string name="info_phone1"><![CDATA[Please enter your Country Code\n and Phone number for verification]]></string>
+    <string name="generate_otp">Generate OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="info_phone2">We have sent you an OTP \n for phone number verification</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="working">working…</string>
+    <string name="Please_enter_the_otp">Please enter the OTP</string>
+    <string name="verification_failed">Verification Failed, please try again.</string>
+    <string name="fill_the_form">Please fill in the form to continue.</string>
+    <string name="otp_invalid">The OTP entered was invalid</string>
+    <string name="change_phone_number">change phone number</string>
 
 </resources>

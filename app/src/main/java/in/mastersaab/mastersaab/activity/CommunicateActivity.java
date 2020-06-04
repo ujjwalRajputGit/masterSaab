@@ -79,15 +79,4 @@ public class CommunicateActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        Fragment fragment = fragmentManager.findFragmentById(R.id.update_snakeBar);
-        if (fragment != null) {
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.remove(fragment);
-            fragmentTransaction.commit();
-        } else {
-            super.onBackPressed();
-        }
-    }
 }

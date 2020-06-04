@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.authentication.PhoneAuthFragment">
+
+    <Button
+        android:id="@+id/generateOTP_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/emailButton_signInColor"
+        android:fontFamily="@font/open_sans_semibold"
+        android:padding="16dp"
+        android:text="@string/generate_otp"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNo_EditText" />
+
+    <Button
+        android:id="@+id/verifyOTP_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/emailButton_signInColor"
+        android:fontFamily="@font/open_sans_semibold"
+        android:padding="16dp"
+        android:text="@string/verify_otp"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/changePhone" />
+
+    <EditText
+        android:id="@+id/countyCode_EditText"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="country code"
+        android:background="@color/light_gray"
+        android:ems="10"
+        android:hint="@string/_91"
+        android:inputType="number"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneNo_EditText"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="@id/phoneNo_EditText" />
+
+    <EditText
+        android:id="@+id/phoneNo_EditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints="phone number"
+        android:background="@color/light_gray"
+        android:ems="10"
+        android:hint="@string/your_phone_number"
+        android:inputType="phone"
+        android:padding="16dp"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/countyCode_EditText"
+        app:layout_constraintTop_toBottomOf="@id/infoPhone2_TextView" />
+
+    <EditText
+        android:id="@+id/otp_EditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:autofillHints="@string/enter_otp"
+        android:background="@color/light_gray"
+        android:hint="@string/enter_otp"
+        android:inputType="text"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/infoPhone3_TextView" />
+
+    <ProgressBar
+        android:id="@+id/generateOTP_Progress"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="10dp"
+        android:translationZ="3dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/generateOTP_Button"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="@id/generateOTP_Button" />
+
+    <ProgressBar
+        android:id="@+id/verifyOTP_Progress"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="10dp"
+        android:translationZ="3dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/verifyOTP_button"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="@id/verifyOTP_button" />
+
+    <TextView
+        android:id="@+id/infoPhone1_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="@string/verify_your_number"
+        android:textColor="@color/emailButton_signInColor"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/infoPhone2_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/info_phone1"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/infoPhone1_TextView" />
+
+    <TextView
+        android:id="@+id/infoPhone3_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/info_phone2"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/generate_error" />
+
+    <TextView
+        android:id="@+id/resendOTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/resend_otp"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/changePhone"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toBottomOf="@id/otp_EditText" />
+
+    <TextView
+        android:id="@+id/changePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/change_phone_number"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/otp_EditText"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+
+    <TextView
+        android:id="@+id/generate_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/working"
+        android:textColor="@color/design_default_color_error"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/generateOTP_Button" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/verifyOTP_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="verifyOTP_button,otp_EditText,infoPhone3_TextView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
